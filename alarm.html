@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm</title>
+    <!-- Font Awesome Icons (Latest Version) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Bootstrap CSS (v5.2) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- Bootstrap JS (v5.2 with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
+        async></script>
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
+
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="alarm.css">
+    <style>
+        /* Fix dropdown positioning and ensure it doesn't get cut off */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: auto;
+            right: 0;
+            min-width: 12rem;
+            /* Ensure the dropdown is wide enough */
+            z-index: 1000;
+            overflow: visible;
+            /* Prevent cutting off content */
+        }
+
+        /* Show dropdown on hover */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            position: absolute;
+        }
+
+        /* Hover effect on text and dividers between items */
+        .dropdown-item {
+            border-bottom: 1px solid #ccc;
+            padding: 0.5rem 1rem;
+            /* Consistent spacing for all items */
+        }
+
+        /* Hover effect */
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+            color: #007bff;
+            /* Text hover color */
+        }
+
+        /* Ensure no parent elements hide the dropdown */
+        .navbar {
+            overflow: visible;
+        }
+
+        /* Remove the bottom border from the last item */
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .container-item {
+            background-image: url('./images/alarms.jpg');
+            /* Replace with the path to your image */
+            background-size: cover;
+            /* Ensures the image covers the entire container */
+            background-position: center;
+            /* Centers the background image */
+            background-repeat: no-repeat;
+            /* Prevents the image from repeating */
+            height: 100vh;
+            /* Makes the section full height */
+        }
+
+        .semi-transparent-bg {
+            background-color: rgba(255, 255, 255, 0.7);
+            /* White with 70% opacity */
+            padding: 10px;
+            /* Add some padding */
+            border-radius: 5px;
+            /* Rounded corners */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark navbar-expand-sm sticky-top">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand dance-font">TRADE<span class="text-success">YANTRA</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#royal-navbar"
+                aria-controls="royal-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="royal-navbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item px-3">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="cart.html" class="nav-link">Cart</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="courses.html" class="nav-link">Courses</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="alarm.html" class="nav-link">Alarm</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                    <!-- User Icon with Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-person"></i> <!-- Bootstrap Icons user icon -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                            <li><a class="dropdown-item" href="#">My Purchases</a></li>
+                            <li><a class="dropdown-item" href="#">Notifications</a></li>
+                            <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                    <!-- End User Icon Dropdown -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container-item">
+        <div class="main">
+            <div class="container-alarm">
+                <h1 id="heading-alarm" class="text-primary semi-transparent-bg">Reminder App</h1>
+                <input class="input-alarm" type="email" placeholder="Email" id="email"><br><br>
+                <input class="input-alarm" type="text" id="reminderText" placeholder="Enter your reminder"><br><br>
+                <input class="input-alarm" type="datetime-local" id="reminderTime"><br><br>
+                <button onclick="setReminder()" id="plugin" class="bg-primary">Send</button>
+            </div>
+            <div class="v1"></div>
+            <div class="second-container-alarm" id="part2">
+                <div class="box"></div>
+                <div class="clock" id="right1">
+                    <div class="time-set">
+                        <div class="time">
+                            <h3 class="text-primary">TIME</h3>
+                        </div>
+                        <div class="hours"><span id="hrs">00</span>
+                            <p id="hrs1">hours</p>
+                        </div>
+                        <p id="dot1">:</p>
+                        <div class="minutes"><span id="mins">00</span>
+                            <p id="mins1">mins</p>
+                        </div>
+                        <p id="dot1">:</p>
+                        <div class="seconds"><span id="secs">00</span>
+                            <p id="secs1">secs</p>
+                        </div>
+                        <div class="am1"><span id="am"></span></div>
+                    </div>
+                    <div id="back1"></div>
+                    <div id="back2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-alarm semi-transparent-bg">
+            <h2 class="text-primary">How To Use?</h2>
+            <pre style="font-family: 'Open Sans', sans-serif; font-size:18px;">
+        1. Hi This Is PharmBelief We need to know about
+           how to work with user Rich interface for easy 
+           attractive.
+    
+        2. Mail id is taking userEmail Input in the first Column. 
+    
+        3. Next we are going to take date and time to set 
+           the date and time.
+    
+        4. By tapping the Send button we will get a notification
+           to alert the mail.</pre>
+        </div>
+        <script>
+            function clock() {
+                var hours = document.getElementById("hrs");
+                var minutes = document.getElementById("mins");
+                var seconds = document.getElementById("secs");
+                var am = document.getElementById("am");
+                var hour = new Date();
+                var a = hour.getHours() > 12 && hour.getHours() < 24 ? hour.getHours() - 12 : hour.getHours();
+                var b = hour.getMinutes() < 10 ? "0" + hour.getMinutes() : hour.getMinutes();
+                var c = hour.getSeconds() < 10 ? "0" + hour.getSeconds() : hour.getSeconds();
+                var d = hour.getHours() > 12 && hour.getHours() < 24 ? "PM" : "AM";
+                hours.innerHTML = a;
+                minutes.innerHTML = b;
+                seconds.innerHTML = c;
+                am.innerHTML = d;
+            }
+            setInterval(clock, 1000);
+        </script>
+    </section>
+
+
+
+
+
+        <!-- Footer -->
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-white mb-3 h5">Quick Links</h4>
+                        <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="index.html">Home</a></p>
+                        <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="">About</a></p>
+                        <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="courses.html">Courses</a></p>
+                        <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="cart.html">Cart</a></p>
+                        <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="contact.html">Contact</a></p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-white mb-3 h5">Contact</h4>
+                        <p class="mb-2 small">
+                            <i class="fa fa-map-marker-alt me-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Chennai,+India" target="_blank"
+                                class="text-white">Chennai, India</a>
+                        </p>
+                        <p class="mb-2 small">
+                            <i class="fa fa-phone-alt me-2"></i>+91 7013698779
+                        </p>
+                        <p class="mb-2 small">
+                            <i class="fa fa-envelope me-2"></i>
+                            <a href="mailto:muraliungati5876@gmail.com"
+                                class="text-white">muraliungati5876@gmail.com</a>
+                        </p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light rounded-circle me-2" href=""><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light rounded-circle me-2" href=""><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light rounded-circle me-2" href=""><i
+                                    class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light rounded-circle" href=""><i
+                                    class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-white mb-3 h5">Gallery</h4>
+                        <div class="row g-2 pt-2">
+                            <div class="col-4">
+                                <img class="img-fluid bg-light p-1 gallery-img" src="./images/s1.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid bg-light p-1 gallery-img" src="./images/s2.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid bg-light p-1 gallery-img" src="./images/s3.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid bg-light p-1 gallery-img" src="./images/s4.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid bg-light p-1 gallery-img" src="./images/s5.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid bg-light p-1 gallery-img" src="./images/s6.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-white mb-3 h5">Newsletter</h4>
+                        <p class="small">Pain is just a part of life, and sometimes we face challenges that seem
+                            overwhelming.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text"
+                                placeholder="Your email">
+                            <button type="button"
+                                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="index.html">Tradeyantra</a>, All Rights Reserved to
+                            <a class="border-bottom" href="https://itsmuraliungati.netlify.app/">ungati murali</a><br>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+
+
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        
+<script src="alarm.js"></script>
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "oJmY6qRa4EPP-tvKg",
+      });
+   })();
+</script>
+    </body>
+
+</html>

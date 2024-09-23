@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cart</title>
+
+    <!-- Bootstrap CSS (single import) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for icons (or use Bootstrap Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    
+    
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <style>
+        /* Fix dropdown positioning and ensure it doesn't get cut off */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: auto;
+            right: 0;
+            min-width: 12rem;
+            z-index: 1000;
+            overflow: visible;
+        }
+
+        /* Show dropdown on hover */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            position: absolute;
+        }
+
+        .dropdown-item {
+            border-bottom: 1px solid #ccc;
+            padding: 0.5rem 1rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+            color: #007bff;
+        }
+
+        .navbar {
+            overflow: visible;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .gallery-img {
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+            filter: brightness(0.9);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-dark bg-dark navbar-expand-sm sticky-top">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand dance-font">TRADE<span class="text-success">YANTRA</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#royal-navbar" aria-controls="royal-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="royal-navbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item px-3">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="cart.html" class="nav-link">cart</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="courses.html" class="nav-link">Courses</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="alarm.html" class="nav-link">Alarm</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                            <li><a class="dropdown-item" href="#">My Purchases</a></li>
+                            <li><a class="dropdown-item" href="#">Notifications</a></li>
+                            <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main container for cart -->
+    <div class="container my-5">
+        <h1 class="mb-4">Shopping Cart</h1>
+
+        <div id="emptyCart" style="display: none;">
+            <p>Your cart is empty. <a href="courses.html">Browse courses</a> to add some!</p>
+        </div>
+
+        <table class="table" id="cartTable">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Instructor</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cartItems"></tbody>
+        </table>
+
+        <div class="d-flex justify-content-between">
+            <a href="courses.html" class="btn btn-secondary">Continue Shopping</a>
+            <button class="btn btn-danger" id="emptyCartBtn" style="display: none;">Empty Cart</button>
+            <button class="btn btn-success" id="checkoutBtn" style="display: none;">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+   
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6qbOp1CwKfD7gheqz6bPqn5pb6I5JkX4eca2GoF5K5p4v0yw6ZT" crossorigin="anonymous">
+    </script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <!-- Footer -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3 h5">Quick Links</h4>
+                    <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="index.html">Home</a></p>
+                <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="cart.html">cart</a></p>
+                <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="courses.html">Courses</a></p>
+                <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="cart.html">Cart</a></p>
+                <p class="mb-2 small"><a class="btn btn-link text-light p-0" href="contact.html">Contact</a></p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3 h5">Contact</h4>
+                    <p class="mb-2 small">
+                        <i class="fa fa-map-marker-alt me-2"></i>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Chennai,+India" target="_blank" class="text-white">Chennai, India</a>
+                    </p>
+                    <p class="mb-2 small">
+                        <i class="fa fa-phone-alt me-2"></i>+91 7013698779
+                    </p>
+                    <p class="mb-2 small">
+                        <i class="fa fa-envelope me-2"></i>
+                        <a href="mailto:muraliungati5876@gmail.com" class="text-white">muraliungati5876@gmail.com</a>
+                    </p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3 h5">Gallery</h4>
+                    <div class="row g-2 pt-2">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 gallery-img" src="./images/s1.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 gallery-img" src="./images/s2.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 gallery-img" src="./images/s3.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 gallery-img" src="./images/s4.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 gallery-img" src="./images/s5.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 gallery-img" src="./images/s6.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3 h5">Newsletter</h4>
+                    <p class="small">Pain is just a part of life, and sometimes we face challenges that seem overwhelming.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="index.html">Tradeyantra</a>, All Rights Reserved to
+                        <a class="border-bottom" href="https://itsmuraliungati.netlify.app/">ungati murali</a><br>
+                    
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+
+    <!-- Cart Functionality Script -->
+    <script>
+        // Initialize cart items from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Function to render the cart
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const emptyCart = document.getElementById('emptyCart');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const emptyCartBtn = document.getElementById('emptyCartBtn');
+
+            // Clear the existing content
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyCart.style.display = 'block';
+                document.getElementById('cartTable').style.display = 'none';
+                checkoutBtn.style.display = 'none';
+                emptyCartBtn.style.display = 'none';
+            } else {
+                emptyCart.style.display = 'none';
+                document.getElementById('cartTable').style.display = 'table';
+                checkoutBtn.style.display = 'block';
+                emptyCartBtn.style.display = 'block';
+
+                let total = 0;
+
+                // Create table rows for each course in the cart
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    const row = `
+                        <tr>
+                            <td><img src="${item.image}" class="img-thumbnail" style="width: 100px;"> ${item.courseName}</td>
+                            <td>${item.instructor}</td>
+                            <td>$${item.price.toFixed(2)}</td>
+                            <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button></td>
+                        </tr>`;
+                    cartItemsContainer.innerHTML += row;
+                });
+
+                // Add a total row
+                cartItemsContainer.innerHTML += `
+                    <tr class="table-primary">
+                        <td colspan="2">Total:</td>
+                        <td>$${total.toFixed(2)}</td>
+                        <td></td>
+                    </tr>`;
+            }
+        }
+
+        // Function to remove a specific course from the cart
+        function removeFromCart(index) {
+            cart.splice(index, 1); // Remove the course at the given index
+            localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
+            renderCart();
+        }
+
+        // Empty the cart
+        document.getElementById('emptyCartBtn').onclick = function() {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        };
+
+        // Initialize cart rendering on page load
+        window.onload = function() {
+            renderCart();
+        };
+    </script>
+
+    <!-- Bootstrap JS (single import) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
